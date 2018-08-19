@@ -7,8 +7,8 @@
 #include <math.h>
 #include <stdlib.h>
 char getbit();
-char getb(FILE *f);
+char getb(FILE *stream);
 bool putbit(bool v);
-bool putb(FILE *f, bool v);
+bool putb(bool v, FILE *stream);
 int toDec(char *buffer);
 #endif

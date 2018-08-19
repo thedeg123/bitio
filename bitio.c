@@ -6,7 +6,7 @@ char getbit(){
   return getb(stdin);
 }
 //Returns the next bit in file as a Char. returns EOF at file end
-char getb(FILE * f)
+char getb(FILE * stream)
 {
   static char c;
   static int pos = 0;
@@ -16,22 +16,22 @@ char getb(FILE * f)
   }
   else{
     pos = CHAR_BIT;
-    c = getc(f);
-    return (c!=EOF)? getb(f):EOF;
+    c = getc(stream);
+    return (c!=EOF)? getb(stream):EOF;
   }
 }
 //Shortcut to stdio. Like putchar()
 bool putbit(bool v){
-  return putb(stdout, v);
+  return putb(v, stdout);
 }
 //places next bit in file. Buffer is size of system char.
-bool putb(FILE *f, bool v){
+bool putb(bool v, FILE *stream){
   static char buffer[CHAR_BIT] = {'0'};
   static int count = 0;
   buffer[count] = (v)? '1':'0';
   count++;
   if(!(count%CHAR_BIT)){
-    fprintf(f, "%c", (char) toDec(buffer));
+    fprintf(stream, "%c", (char) toDec(buffer));
     memset(buffer, '0', CHAR_BIT*sizeof(char));
     count = 0;
   }
